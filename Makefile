@@ -22,7 +22,7 @@ docker-build-time-middle-mtls:
 
 .PHONY: docker-build-time-client
 docker-build-time-client:
-	docker buildx build --builder osm --platform=$(DOCKER_BUILDX_PLATFORM) -o $(DOCKER_BUILDX_OUTPUT) -t $(CTR_REGISTRY)/mtls-egress-demo-client:$(CTR_TAG) -f dockerfiles/Dockerfile.middle --build-arg GO_VERSION=$(DOCKER_GO_VERSION) --build-arg LDFLAGS=$(LDFLAGS) .
+	docker buildx build --builder osm --platform=$(DOCKER_BUILDX_PLATFORM) -o $(DOCKER_BUILDX_OUTPUT) -t $(CTR_REGISTRY)/mtls-egress-demo-client:$(CTR_TAG) -f dockerfiles/Dockerfile.client --build-arg GO_VERSION=$(DOCKER_GO_VERSION) --build-arg LDFLAGS=$(LDFLAGS) .
 
 .PHONY: docker-build
 docker-build: docker-build-time-server docker-build-time-middle docker-build-time-middle-mtls docker-build-time-client

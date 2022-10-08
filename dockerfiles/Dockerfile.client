@@ -1,0 +1,17 @@
+ARG GO_VERSION
+FROM --platform=$BUILDPLATFORM golang:$GO_VERSION AS builder
+ARG LDFLAGS
+ARG TARGETOS
+ARG TARGETARCH
+
+WORKDIR /osm
+COPY cmd/client/client.go .
+RUN --mount=type=cache,target=/root/.cache/go-build \
+    --mount=type=cache,target=/go/pkg \
+    CGO_ENABLED=0 GOOS=$TARGETOS GOARCH=$TARGETARCH go build -v -o client -ldflags "$LDFLAGS" client.go
+
+FROM cybwan/gcr.io.distroless.static
+COPY --from=builder /osm/client /
+COPY certs/ca.crt /certs/
+COPY certs/client.crt /certs/
+COPY certs/client.key /certs/

@@ -1,0 +1,17 @@
+ARG GO_VERSION
+FROM --platform=$BUILDPLATFORM golang:$GO_VERSION AS builder
+ARG LDFLAGS
+ARG TARGETOS
+ARG TARGETARCH
+
+WORKDIR /osm
+COPY cmd/middle-mtls/middle.go .
+RUN --mount=type=cache,target=/root/.cache/go-build \
+    --mount=type=cache,target=/go/pkg \
+    CGO_ENABLED=0 GOOS=$TARGETOS GOARCH=$TARGETARCH go build -v -o middle -ldflags "$LDFLAGS" middle.go
+
+FROM cybwan/gcr.io.distroless.static
+COPY --from=builder /osm/middle /
+COPY certs/ca.crt /certs/
+COPY certs/middle.crt /certs/
+COPY certs/middle.key /certs/

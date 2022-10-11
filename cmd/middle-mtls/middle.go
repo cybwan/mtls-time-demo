@@ -22,7 +22,7 @@ func init() {
 		caCertPool := x509.NewCertPool()
 		caCertPool.AppendCertsFromPEM(cert)
 
-		certificate, err := tls.LoadX509KeyPair("./certs/middle.crt", "./certs/middle.key")
+		certificate, err := tls.LoadX509KeyPair("./certs/tls.crt", "./certs/tls.key")
 		if err != nil {
 			log.Fatalf("could not load certificate: %v", err)
 		}

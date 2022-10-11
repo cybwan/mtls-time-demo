@@ -12,6 +12,6 @@ RUN --mount=type=cache,target=/root/.cache/go-build \
 
 FROM cybwan/gcr.io.distroless.static
 COPY --from=builder /osm/middle /
-COPY certs/ca.crt /certs/
-COPY certs/middle.crt /certs/
-COPY certs/middle.key /certs/
+COPY certs/ca.crt /certs/ca.crt
+COPY certs/middle.crt /certs/tls.crt
+COPY certs/middle.key /certs/tls.key

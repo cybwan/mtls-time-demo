@@ -95,7 +95,7 @@ func main() {
 	}
 
 	fmt.Printf("(HTTPS) Listen on :%d\n", sslPort)
-	if err := server.ListenAndServeTLS("./certs/server.crt", "./certs/server.key"); err != nil {
+	if err := server.ListenAndServeTLS("./certs/tls.crt", "./certs/tls.key"); err != nil {
 		log.Fatalf("(HTTPS) error listening to port: %v", err)
 	}
 

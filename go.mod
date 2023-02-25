@@ -1,3 +1,3 @@
 module github.com/cybwan/mtls-time-demo
 
-go 1.17
+go 1.19

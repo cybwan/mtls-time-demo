@@ -1,7 +1,7 @@
 CTR_REGISTRY = cybwan
 CTR_TAG      = latest
 
-DOCKER_GO_VERSION = 1.17
+DOCKER_GO_VERSION = 1.19
 DOCKER_BUILDX_PLATFORM ?= linux/amd64
 DOCKER_BUILDX_OUTPUT ?= type=registry
 
